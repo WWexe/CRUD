@@ -144,11 +144,11 @@ void exibirPcsCadastrados(PC listaPc[], int quantidade) {
 
 void menu() {
     printf("\n===== Bem-vindo ao CRUD de PCs =====\n\n");
-    printf("||  1 - Cadastrar PC\n");
-    printf("||  2 - Listar PCs Cadastrados\n");
-    printf("||  3 - Pesquisar PC por Nome\n");
-    printf("||  4 - Deletar Registro\n");
-    printf("||  5 - Sair\n\n");
+    printf("||  1  - Cadastrar PC\n");
+    printf("||  2  - Listar PCs Cadastrados\n");
+    printf("||  3  - Pesquisar PC por Nome\n");
+    printf("||  4  - Deletar Registro\n");
+    printf("||  5  - Sair\n\n");
     printf("*** Escolha uma das opcoes acima ***\n");
 }
 
