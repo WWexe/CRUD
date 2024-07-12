@@ -63,6 +63,7 @@ void pesquisarPorNome(PC listaPc[], int quantidade) {
         if (strcmp(listaPc[i].nome, nome) == 0) {
             printf("\033[H\033[J");
             printf("===== Registro encontrado =====\n");
+            printf("|| NOME - %s\n", listaPc[i].nome);
             printf("|| PC - %d\n", i + 1);
             printf("|| CPU - %s\n", listaPc[i].cpu);
             printf("|| Placa Mae - %s\n", listaPc[i].placaMae);
