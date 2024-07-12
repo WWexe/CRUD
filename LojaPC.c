@@ -62,16 +62,15 @@ void pesquisarPorNome(PC listaPc[], int quantidade) {
     for (int i = 0; i < quantidade; i++) {
         if (strcmp(listaPc[i].nome, nome) == 0) {
             printf("\033[H\033[J");
-            printf("--- Registro encontrado ---\n");
-            printf("PC %d:\n", i + 1);
-            printf("NOME: %s\n", listaPc[i].nome);
-            printf("CPU: %s\n", listaPc[i].cpu);
-            printf("Placa Mae: %s\n", listaPc[i].placaMae);
-            printf("Placa de Video: %s\n", listaPc[i].placaDeVideo);
-            printf("Fonte: %s\n", listaPc[i].fonte);
-            printf("RAM: %s\n", listaPc[i].memoriaRam);
-            printf("Armazenamento: %s\n", listaPc[i].armazenamento);
-            printf("Gabinete: %s\n", listaPc[i].gabinete);
+            printf("===== Registro encontrado =====\n");
+            printf("|| PC - %d\n", i + 1);
+            printf("|| CPU - %s\n", listaPc[i].cpu);
+            printf("|| Placa Mae - %s\n", listaPc[i].placaMae);
+            printf("|| Placa de Video - %s\n", listaPc[i].placaDeVideo);
+            printf("|| Fonte - %s\n", listaPc[i].fonte);
+            printf("|| RAM - %s\n", listaPc[i].memoriaRam);
+            printf("|| Armazenamento - %s\n", listaPc[i].armazenamento);
+            printf("|| Gabinete - %s\n", listaPc[i].gabinete);
             encontrado = 1;
             break;
         }
@@ -94,19 +93,19 @@ void deletarRegistro(PC listaPc[], int *quantidade) {
         if (strcmp(listaPc[i].nome, nome) == 0) {
             printf("\033[H\033[J");
             printf("*** Registro encontrado ***\n\n");
-            printf("PC %d:\n", i + 1);
-            printf("NOME: %s\n", listaPc[i].nome);
-            printf("CPU: %s\n", listaPc[i].cpu);
-            printf("Placa Mae: %s\n", listaPc[i].placaMae);
-            printf("Placa de Video: %s\n", listaPc[i].placaDeVideo);
-            printf("Fonte: %s\n", listaPc[i].fonte);
-            printf("RAM: %s\n", listaPc[i].memoriaRam);
-            printf("Armazenamento: %s\n", listaPc[i].armazenamento);
-            printf("Gabinete: %s\n\n", listaPc[i].gabinete);
+            printf(" --- PC  %d ---\n", i + 1);
+            printf("|| NOME - %s\n", listaPc[i].nome);
+            printf("|| CPU - %s\n", listaPc[i].cpu);
+            printf("|| Placa Mae - %s\n", listaPc[i].placaMae);
+            printf("|| Placa de Video - %s\n", listaPc[i].placaDeVideo);
+            printf("|| Fonte - %s\n", listaPc[i].fonte);
+            printf("|| RAM - %s\n", listaPc[i].memoriaRam);
+            printf("|| Armazenamento - %s\n", listaPc[i].armazenamento);
+            printf("|| Gabinete - %s\n\n", listaPc[i].gabinete);
             encontrado = 1;
             printf("=== TEM CERTEZA QUE QUER DELETAR O REGISTRO? ===\n");
-            printf("1 - NAO\n");
-            printf("2 - SIM\n");
+            printf("|| 1 - NAO\n");
+            printf("|| 2 - SIM\n");
             scanf("%d", &resposta);
             if (resposta == 2) {
                 for (int j = i; j < *quantidade - 1; j++) {
@@ -127,28 +126,28 @@ void deletarRegistro(PC listaPc[], int *quantidade) {
 }
 
 void exibirPcsCadastrados(PC listaPc[], int quantidade) {
-    printf("--- PCs Cadastrados ---\n");
+    printf("===== PCs Cadastrados =====\n\n");
 
     for (int i = 0; i < quantidade; i++) {
-        printf("PC %d:\n", i + 1);
-        printf("NOME: %s\n", listaPc[i].nome);
-        printf("CPU: %s\n", listaPc[i].cpu);
-        printf("Placa Mae: %s\n", listaPc[i].placaMae);
-        printf("Placa de Video: %s\n", listaPc[i].placaDeVideo);
-        printf("Fonte: %s\n", listaPc[i].fonte);
-        printf("RAM: %s\n", listaPc[i].memoriaRam);
-        printf("Armazenamento: %s\n", listaPc[i].armazenamento);
-        printf("Gabinete: %s\n\n", listaPc[i].gabinete);
+        printf("--- PC %d ---\n\n", i + 1);
+        printf("|| NOME - %s\n", listaPc[i].nome);
+        printf("|| CPU - %s\n", listaPc[i].cpu);
+        printf("|| Placa Mae - %s\n", listaPc[i].placaMae);
+        printf("|| Placa de Video - %s\n", listaPc[i].placaDeVideo);
+        printf("|| Fonte - %s\n", listaPc[i].fonte);
+        printf("|| RAM - %s\n", listaPc[i].memoriaRam);
+        printf("|| Armazenamento - %s\n", listaPc[i].armazenamento);
+        printf("|| Gabinete - %s\n\n", listaPc[i].gabinete);
     }
 }
 
 void menu() {
     printf("\n===== Bem-vindo ao CRUD de PCs =====\n\n");
-    printf("||  1  - Cadastrar PC\n");
-    printf("||  2  - Listar PCs Cadastrados\n");
-    printf("||  3  - Pesquisar PC por Nome\n");
-    printf("||  4  - Deletar Registro\n");
-    printf("||  5  - Sair\n\n");
+    printf("| 1 | - Cadastrar PC\n");
+    printf("| 2 | - Listar PCs Cadastrados\n");
+    printf("| 3 | - Pesquisar PC por Nome\n");
+    printf("| 4 | - Deletar Registro\n");
+    printf("| 5 | - Sair\n\n");
     printf("*** Escolha uma das opcoes acima ***\n");
 }
 
