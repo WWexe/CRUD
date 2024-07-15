@@ -140,10 +140,16 @@ void exibirPcsCadastrados(PC listaPc[], int quantidade) {
         printf("|| Armazenamento - %s\n", listaPc[i].armazenamento);
         printf("|| Gabinete - %s\n\n", listaPc[i].gabinete);
     }
+
 }
 
 void menu() {
-    printf("\n===== Bem-vindo ao CRUD de PCs =====\n\n");
+    printf("__________                   ____   ____.__             .___        \n");
+    printf("\\______   \\  ____    _____   \\   \\ /   /|__|  ____    __| _/  ____  \n");
+    printf(" |    |  _/_/ __ \\  /     \\   \\   Y   / |  | /    \\  / __ |  /  _ \\ \n");
+    printf(" |    |   \\\\  ___/ |  Y Y  \\   \\     /  |  ||   |  \\/ /_/ | (  <_> )\n");
+    printf(" |______  / \\___  >|__|_|  /    \\___/   |__||___|  /\\____ |  \\____/ \n");
+    printf("        \\/      \\/       \\/                      \\/      \\/         \n\n");
     printf("| 1 | - Cadastrar PC\n");
     printf("| 2 | - Listar PCs Cadastrados\n");
     printf("| 3 | - Pesquisar PC por Nome\n");
@@ -167,6 +173,7 @@ int main() {
                 cadastrarPc(listaPc, &quantidade);
                 break;
             case 2:
+                printf("\033[H\033[J");
                 exibirPcsCadastrados(listaPc, quantidade);
                 break;
             case 3:
