@@ -82,7 +82,6 @@ void pesquisarNomeAssistencia(ASSISTENCIA assist[], int quantidade) {
             break;
         }
     }
-
     if (!encontrado) {
         printf("Registro não encontrado\n");
     }
@@ -116,7 +115,6 @@ void cadastrarPc(PC listaPc[], int *quantidade) {
         printf("\nInforme Nome e Modelo do Gabinete:\n");
         scanf(" %49[^\n]", listaPc[*quantidade].gabinete);
         getchar();
-
         printf("\033[H\033[J");
         printf("PC cadastrado com sucesso!\n");
         (*quantidade)++;
@@ -149,7 +147,6 @@ void pesquisarPorNome(PC listaPc[], int quantidade) {
             break;
         }
     }
-
     if (!encontrado) {
         printf("Registro não encontrado\n");
     }
@@ -193,7 +190,6 @@ void deletarRegistro(PC listaPc[], int *quantidade) {
             break;
         }
     }
-
     if (!encontrado) {
         printf("PC com nome '%s' não encontrado.\n", nome);
     }
@@ -213,7 +209,6 @@ void exibirPcsCadastrados(PC listaPc[], int quantidade) {
         printf("|| Armazenamento - %s\n", listaPc[i].armazenamento);
         printf("|| Gabinete - %s\n\n", listaPc[i].gabinete);
     }
-
 }
 
 void menu() {
@@ -276,6 +271,5 @@ int main() {
                 break;
         }
     }
-
     return 0;
 }
