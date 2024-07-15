@@ -13,7 +13,80 @@ typedef struct {
     char memoriaRam[50];
     char armazenamento[50];
     char gabinete[50];
-} PC;
+}PC;
+
+typedef struct {
+    char nome[50];
+    char cpf[12];
+    char endereco[100];
+    char descricao[100];
+}ASSISTENCIA;
+
+void cadastrarAssistencia(ASSISTENCIA assist[], int *quantidade) {
+    if (*quantidade < MAX_PCS) {
+        printf("\033[H\033[J");
+        printf("Informe o NOME do cliente:\n");
+        scanf("%49[^\n]", assist[*quantidade].nome);
+        printf("\n");
+        getchar();
+        printf("Informe o CPF do Cliente:\n");
+        scanf("%11[^\n]", assist[*quantidade].cpf);
+        printf("\n");
+        getchar();
+        printf("Informe o ENDERECO(bairro, rua e numero) do cliente:\n");
+        scanf("%99[^\n]", assist[*quantidade].endereco);
+        printf("\n");
+        getchar();
+        printf("Informe a DESCRICAO do cliente sobre o defeito do PC:\n");
+        scanf("%99[^\n]", assist[*quantidade].descricao);
+        printf("\n");
+        getchar();
+        printf("PC cadastrado com sucesso na lista para Assistencia!\n");
+        (*quantidade)++;
+    }else {
+        printf("Limite maximo de PC's para Assistencia!\n");
+    }
+}
+
+void exibirAssistencia(ASSISTENCIA assist[], int quantidade) {
+    printf("\033[H\033[J");
+    printf("===== Clientes Cadastrados =====\n\n");
+
+    for (int i = 0; i < quantidade; i++) {
+        printf("--- Cliente %d ---\n\n", i + 1);
+        printf("|| NOME - %s\n", assist[i].nome);
+        printf("|| CPF - %s\n", assist[i].cpf);
+        printf("|| ENDERECO - %s\n", assist[i].endereco);
+        printf("|| DESCRICAO do Cliente - %s\n\n", assist[i].descricao);
+    }
+}
+
+void pesquisarNomeAssistencia(ASSISTENCIA assist[], int quantidade) {
+    char nome[50];
+    printf("\033[H\033[J");
+    printf("Digite o Nome do CLIENTE: \n");
+    scanf(" %49[^\n]", nome);
+    getchar();
+
+    int encontrado = 0;
+    for (int i = 0; i < quantidade; i++) {
+        if (strcmp(assist[i].nome, nome) == 0) {
+            printf("\033[H\033[J");
+            printf("===== Registro encontrado =====\n");
+            printf("|| CLIENTE - %d\n", i + 1);
+            printf("|| NOME - %s\n", assist[i].nome);
+            printf("|| CPF - %s\n", assist[i].cpf);
+            printf("|| Endereco - %s\n", assist[i].endereco);
+            printf("|| Descricao - %s\n", assist[i].descricao);
+            encontrado = 1;
+            break;
+        }
+    }
+
+    if (!encontrado) {
+        printf("Registro não encontrado\n");
+    }
+}
 
 void cadastrarPc(PC listaPc[], int *quantidade) {
     if (*quantidade < MAX_PCS) {
@@ -154,7 +227,10 @@ void menu() {
     printf("| 2 | - Listar PCs Cadastrados\n");
     printf("| 3 | - Pesquisar PC por Nome\n");
     printf("| 4 | - Deletar Registro\n");
-    printf("| 5 | - Sair\n\n");
+    printf("| 5 | - Cadastrar PC para Assistencia tecnica\n");
+    printf("| 6 | - Exibir Lista Assistencia Tecnica\n");
+    printf("| 7 | - Pesquisar Nome Cliente Lista Assistencia\n");
+    printf("| 8 | - Sair\n\n");
     printf("*** Escolha uma das opcoes acima ***\n");
 }
 
@@ -162,6 +238,7 @@ int main() {
     int opcao;
     int quantidade = 0;
     PC listaPc[MAX_PCS];
+    ASSISTENCIA assist[MAX_PCS];   
 
     while (1) {
         menu();
@@ -183,6 +260,15 @@ int main() {
                 deletarRegistro(listaPc, &quantidade);
                 break;
             case 5:
+                cadastrarAssistencia(assist, &quantidade);
+                break;
+            case 6:
+                exibirAssistencia(assist, quantidade);
+                break;
+            case 7:
+                pesquisarNomeAssistencia(assist, quantidade);
+                break;
+            case 8:
                 printf("Saindo...\n");
                 return 0;
             default:
