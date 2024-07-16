@@ -12,6 +12,19 @@ Contains the following functionalities:
 
 4 - Delete the registry of a PC, locating it by its NAME.
 
-5 - Exit.
+5 - Technical Assistance(Assistance menu).
+
+6 - Exit.
+-----------------------------------------------------------------------------
+
+In Assistance menu -
+
+1 - Register PC for Technical Assistance.
+
+2 - View Technical Assistance List.
+
+3 - Search by Customer Assistance List.
+
+4 - Return to main menu.
 
 PS: the instructions in the code are in Brazilian Portuguese (pt-br).
