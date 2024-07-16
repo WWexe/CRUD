@@ -25,21 +25,18 @@ typedef struct {
 void cadastrarAssistencia(ASSISTENCIA assist[], int *quantidade) {
     if (*quantidade < MAX_PCS) {
         printf("\033[H\033[J");
+        getchar();
         printf("Informe o NOME do cliente:\n");
         scanf("%49[^\n]", assist[*quantidade].nome);
-        printf("\n");
         getchar();
-        printf("Informe o CPF do Cliente:\n");
+        printf("\nInforme o CPF do Cliente:\n");
         scanf("%11[^\n]", assist[*quantidade].cpf);
-        printf("\n");
         getchar();
-        printf("Informe o ENDERECO(bairro, rua e numero) do cliente:\n");
+        printf("\nInforme o ENDERECO(bairro, rua e numero) do cliente:\n");
         scanf("%99[^\n]", assist[*quantidade].endereco);
-        printf("\n");
         getchar();
-        printf("Informe a DESCRICAO do cliente sobre o defeito do PC:\n");
+        printf("\nInforme a DESCRICAO do cliente sobre o defeito do PC:\n");
         scanf("%99[^\n]", assist[*quantidade].descricao);
-        printf("\n");
         getchar();
         printf("PC cadastrado com sucesso na lista para Assistencia!\n");
         (*quantidade)++;
@@ -212,25 +209,37 @@ void exibirPcsCadastrados(PC listaPc[], int quantidade) {
 }
 
 void menu() {
-    printf("__________                   ____   ____.__             .___        \n");
-    printf("\\______   \\  ____    _____   \\   \\ /   /|__|  ____    __| _/  ____  \n");
-    printf(" |    |  _/_/ __ \\  /     \\   \\   Y   / |  | /    \\  / __ |  /  _ \\ \n");
-    printf(" |    |   \\\\  ___/ |  Y Y  \\   \\     /  |  ||   |  \\/ /_/ | (  <_> )\n");
-    printf(" |______  / \\___  >|__|_|  /    \\___/   |__||___|  /\\____ |  \\____/ \n");
-    printf("        \\/      \\/       \\/                      \\/      \\/         \n\n");
+    printf("  ____                  __      ___           _       \n");
+    printf(" |  _ \\                 \\ \\    / (_)         | |      \n");
+    printf(" | |_) | ___ _ __ ___    \\ \\  / / _ _ __   __| | ___  \n");
+    printf(" |  _ < / _ \\ '_ ` _ \\    \\ \\/ / | | '_ \\ / _` |/ _ \\ \n");
+    printf(" | |_) |  __/ | | | | |    \\  /  | | | | | (_| | (_) |\n");
+    printf(" |____/ \\___|_| |_| |_|     \\/   |_|_| |_|\\__,_|\\___/ \n\n");
     printf("| 1 | - Cadastrar PC\n");
     printf("| 2 | - Listar PCs Cadastrados\n");
     printf("| 3 | - Pesquisar PC por Nome\n");
     printf("| 4 | - Deletar Registro\n");
-    printf("| 5 | - Cadastrar PC para Assistencia tecnica\n");
-    printf("| 6 | - Exibir Lista Assistencia Tecnica\n");
-    printf("| 7 | - Pesquisar Nome Cliente Lista Assistencia\n");
-    printf("| 8 | - Sair\n\n");
+    printf("| 5 | - Assistencia Tecnica\n");
+    printf("| 6 | - Sair\n\n");
     printf("*** Escolha uma das opcoes acima ***\n");
+}
+
+void menuAssist() {
+    printf("                   _     _                  _       \n");
+    printf("     /\\           (_)   | |                (_)      \n");
+    printf("    /  \\   ___ ___ _ ___| |_ ___ _ __   ___ _  __ _ \n");
+    printf("   / /\\ \\ / __/ __| / __| __/ _ \\ '_ \\ / __| |/ _` |\n");
+    printf("  / ____ \\ __ \\__ \\ \\__ \\ ||  __/ | | | (__| | (_| |\n");
+    printf(" /_/    \\_\\___/___/_|___/\\__\\___|_| |_|\\___|_|\\__,_|\n\n");
+    printf("| 1 | - Cadastrar PC para Assistencia Tecnica\n");
+    printf("| 2 | - Exibir Lista Assistencia Tecnica\n");
+    printf("| 3 | - Pesquisar por Cliente Lista Assistencia\n");
+    printf("| 4 | - Voltar ao Menu Principal\n");
 }
 
 int main() {
     int opcao;
+    int opcao2;
     int quantidade = 0;
     PC listaPc[MAX_PCS];
     ASSISTENCIA assist[MAX_PCS];   
@@ -255,15 +264,30 @@ int main() {
                 deletarRegistro(listaPc, &quantidade);
                 break;
             case 5:
-                cadastrarAssistencia(assist, &quantidade);
+                while (opcao2 != 4) {
+                    printf("\033[H\033[J");
+                    menuAssist();
+                    scanf("%d", &opcao2);
+                    switch (opcao2) {
+                        case 1:
+                            cadastrarAssistencia(assist, &quantidade);
+                            break;
+                        case 2:
+                            exibirAssistencia(assist, quantidade);
+                            break;
+                        case 3:
+                            pesquisarNomeAssistencia(assist, quantidade);
+                            break;
+                        case 4:
+                            printf("\033[H\033[J");
+                            break;
+                        default:
+                            printf("Escolha uma opcao valida\n");
+                            break;
+                    }
+                }
                 break;
             case 6:
-                exibirAssistencia(assist, quantidade);
-                break;
-            case 7:
-                pesquisarNomeAssistencia(assist, quantidade);
-                break;
-            case 8:
                 printf("Saindo...\n");
                 return 0;
             default:
