@@ -1,4 +1,5 @@
 This is a simple CRUD (Create, Ready, Update and Delete), from a "PC Store".
+-----------------------------------------------------------------------------
 
 To use it, simply clone the repository, open it in your VSCode with the C/C++ compile run extension and its previously installed requirements.
 
@@ -15,9 +16,9 @@ Contains the following functionalities:
 5 - Technical Assistance(Assistance menu).
 
 6 - Exit.
------------------------------------------------------------------------------
 
 In Assistance menu -
+-----------------------------------------------------------------------------
 
 1 - Register PC for Technical Assistance.
 
