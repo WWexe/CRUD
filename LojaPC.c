@@ -56,6 +56,10 @@ void exibirAssistencia(ASSISTENCIA assist[], int quantidade) {
         printf("|| ENDERECO - %s\n", assist[i].endereco);
         printf("|| DESCRICAO do Cliente - %s\n\n", assist[i].descricao);
     }
+    printf("Pressione 'Enter' para voltar ao menu principal...\n");
+    while (getchar() != '\n') {
+    
+    }
 }
 
 void pesquisarNomeAssistencia(ASSISTENCIA assist[], int quantidade) {
@@ -254,7 +258,6 @@ int main() {
                 cadastrarPc(listaPc, &quantidade);
                 break;
             case 2:
-                printf("\033[H\033[J");
                 exibirPcsCadastrados(listaPc, quantidade);
                 break;
             case 3:
