@@ -70,7 +70,7 @@ void pesquisarNomeAssistencia(ASSISTENCIA assist[], int quantidade) {
     for (int i = 0; i < quantidade; i++) {
         if (strcmp(assist[i].nome, nome) == 0) {
             printf("\033[H\033[J");
-            printf("===== Registro encontrado =====\n");
+            printf("===== Registro encontrado =====\n\n");
             printf("|| CLIENTE - %d\n", i + 1);
             printf("|| NOME - %s\n", assist[i].nome);
             printf("|| CPF - %s\n", assist[i].cpf);
@@ -83,7 +83,7 @@ void pesquisarNomeAssistencia(ASSISTENCIA assist[], int quantidade) {
     if (!encontrado) {
         printf("\nRegistro nao encontrado\n");
     }
-    printf("Pressione 'Enter' para voltar...\n");
+    printf("\nPressione 'Enter' para voltar...\n");
     while (getchar() != '\n') {};
 }
 
@@ -149,15 +149,16 @@ void pesquisarPorNome(PC listaPc[], int quantidade) {
         }
     }
     if (!encontrado) {
-        printf("Registro não encontrado\n");
+        printf("\nRegistro nao encontrado\n");
     }
-    printf("Pressione 'Enter' para voltar...\n");
+    printf("\nPressione 'Enter' para voltar...\n");
     while (getchar() != '\n') {}
 }
 
 void deletarRegistro(PC listaPc[], int *quantidade) {
     char nome[50];
     int resposta;
+    printf("\033[H\033[J");
     printf("Digite o Nome do PC: \n");
     scanf(" %49[^\n]", nome);
     getchar();
@@ -245,7 +246,7 @@ void menuAssist() {
     printf("| 1 | - Cadastrar PC para Assistencia Tecnica\n");
     printf("| 2 | - Exibir Lista Assistencia Tecnica\n");
     printf("| 3 | - Pesquisar por Cliente Lista Assistencia\n");
-    printf("| 4 | - Voltar ao Menu Principal\n");
+    printf("| 4 | - Voltar para o Menu Principal\n");
 }
 
 int main() {
