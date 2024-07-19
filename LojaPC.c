@@ -1,8 +1,15 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdbool.h>
 
 #define MAX_PCS 100
+
+typedef struct {
+    char email[50];
+    char senha[20];
+    bool registrado; // Novo campo para indicar se o usuário está registrado
+} USUARIO;
 
 typedef struct {
     char nome[50];
@@ -21,6 +28,83 @@ typedef struct {
     char endereco[100];
     char descricao[100];
 } ASSISTENCIA;
+
+bool verificarEmailValido(const char *email) {
+    const char *dominiosValidos[] = {"gmail.com", "yahoo.com", "hotmail.com", "outlook.com"};
+    size_t num_dominios_validos = sizeof(dominiosValidos) / sizeof(dominiosValidos[0]);
+
+    char *pos_arroba = strchr(email, '@');
+    if (pos_arroba == NULL) {
+        return false;
+    }
+    char *dominio = pos_arroba + 1;
+
+    for (size_t i = 0; i < num_dominios_validos; i++) {
+        if (strcmp(dominio, dominiosValidos[i]) == 0) {
+            return true;
+        }
+    }
+    return false;
+}
+
+void cadastrarUsuario(USUARIO *usuario) {
+    while (true) {
+        printf("\033[H\033[J"); 
+        printf("Digite seu email: ");
+        scanf("%s", usuario->email);
+
+        if (verificarEmailValido(usuario->email)) {
+            break; 
+        } else {
+            printf("Email digitado possui um domínio inválido. Digite novamente.\n");
+        }
+    }
+
+    while (true) {
+
+        printf("Digite sua senha (max %d caracteres): ", 20 - 1);
+        scanf("%s", usuario->senha);
+
+        char confirmacao[20];
+        printf("Digite novamente sua senha para confirmar: ");
+        scanf("%s", confirmacao);
+
+        if (strcmp(usuario->senha, confirmacao) == 0) {
+            break;
+        } else {
+            printf("As senhas digitadas não coincidem. Tente novamente.\n");
+        }
+    }
+
+    usuario->registrado = true;
+
+    printf("\nCadastro realizado com sucesso!\n");
+    printf("Email: %s\n", usuario->email);
+    printf("Senha: ****** (nao exibida por motivos de seguranca)\n");
+}
+
+bool loginUsuario(USUARIO *usuarios, int numUsuarios, const char *email, const char *senha) {
+    for (int i = 0; i < numUsuarios; i++) {
+        if (strcmp(usuarios[i].email, email) == 0 && strcmp(usuarios[i].senha, senha) == 0) {
+            return true; 
+        }
+    }
+    return false; 
+}
+
+void menuLogin() {
+    printf("\033[H\033[J"); 
+    printf(" _                 _       \n");
+    printf("| |               (_)      \n");
+    printf("| |     ___   __ _ _ _ __  \n");
+    printf("| |    / _ \\ / _` | | '_ \\ \n");
+    printf("| |___| (_) | (_| | | | | |\n");
+    printf("|______\\___/ \\__, |_|_| |_|\n");
+    printf("              __/ |        \n");
+    printf("             |___/         \n\n");
+    printf("| 1 | - Registrar-se\n");
+    printf("| 2 | - Login\n");
+}
 
 void cadastrarAssistencia(ASSISTENCIA assist[], int *quantidade) {
     if (*quantidade < MAX_PCS) {
@@ -250,63 +334,123 @@ void menuAssist() {
 }
 
 int main() {
-    int opcao;
-    int opcao2;
-    int quantidade = 0;
-    PC listaPc[MAX_PCS];
-    ASSISTENCIA assist[MAX_PCS];
+    USUARIO usuarios[100]; // Array to hold up to 100 users
+    int numUsuarios = 0;   // Counter for number of registered users
+    int opcaoLogin;        // User's menu choice for login/register
 
-    while (1) {
-        menu();
-        scanf("%d", &opcao);
-        getchar();
+    PC listaPc[MAX_PCS];   // Array to hold up to 100 PCs
+    int quantidade = 0;    // Counter for number of registered PCs
 
-        switch (opcao) {
+    ASSISTENCIA assist[MAX_PCS];  // Array to hold up to 100 assistance records
+    int opcao;            // Main menu choice
+    int opcao2;           // Assistance menu choice
+
+    while (true) {
+        printf("\033[H\033[J");
+        printf(" _                 _       \n");
+        printf("| |               (_)      \n");
+        printf("| |     ___   __ _ _ _ __  \n");
+        printf("| |    / _ \\ / _` | | '_ \\ \n");
+        printf("| |___| (_) | (_| | | | | |\n");
+        printf("|______\\___/ \\__, |_|_| |_|\n");
+        printf("              __/ |        \n");
+        printf("             |___/         \n\n");
+        printf("| 1 | - Registrar-se\n");
+        printf("| 2 | - Login\n");
+
+        printf("\n*** Escolha uma das opcoes acima ***\n");
+        scanf("%d", &opcaoLogin);
+
+        switch (opcaoLogin) {
             case 1:
-                cadastrarPc(listaPc, &quantidade);
+                cadastrarUsuario(&usuarios[numUsuarios]);
+                numUsuarios++;
                 break;
-            case 2:
-                exibirPcsCadastrados(listaPc, quantidade);
-                break;
-            case 3:
-                pesquisarPorNome(listaPc, quantidade);
-                break;
-            case 4:
-                deletarRegistro(listaPc, &quantidade);
-                break;
-            case 5:
-                opcao2 = 0; // Inicializa a opcao2 para entrar no loop do menu de assistência
-                while (opcao2 != 4) {
+            case 2: {
+                char email[50];
+                char senha[20];
+                bool loginSucesso = false;
+
+                do {
                     printf("\033[H\033[J");
-                    menuAssist();
-                    scanf("%d", &opcao2);
+                    printf("Digite seu email: ");
+                    scanf("%s", email);
+
+                    printf("Digite sua senha: ");
+                    scanf("%s", senha);
+
+                    loginSucesso = loginUsuario(usuarios, numUsuarios, email, senha);
+                    if (!loginSucesso) {
+                        printf("Email ou senha incorretos. Tente novamente.\n");
+                    }
+                } while (!loginSucesso);
+
+                printf("Login realizado com sucesso!\n");
+
+                // After successful login, enter main menu loop
+                while (1) {
+                    printf("\033[H\033[J");
+                    menu();
+                    scanf("%d", &opcao);
                     getchar();
-                    switch (opcao2) {
+
+                    switch (opcao) {
                         case 1:
-                            cadastrarAssistencia(assist, &quantidade);
+                            cadastrarPc(listaPc, &quantidade);
                             break;
                         case 2:
-                            exibirAssistencia(assist, quantidade);
+                            exibirPcsCadastrados(listaPc, quantidade);
                             break;
                         case 3:
-                            pesquisarNomeAssistencia(assist, quantidade);
+                            pesquisarPorNome(listaPc, quantidade);
                             break;
                         case 4:
-                            printf("\033[H\033[J");
+                            deletarRegistro(listaPc, &quantidade);
                             break;
+                        case 5:
+                            opcao2 = 0; // Initialize opcao2 to enter assistance menu loop
+                            while (opcao2 != 4) {
+                                printf("\033[H\033[J");
+                                menuAssist();
+                                scanf("%d", &opcao2);
+                                getchar();
+                                switch (opcao2) {
+                                    case 1:
+                                        cadastrarAssistencia(assist, &quantidade);
+                                        break;
+                                    case 2:
+                                        exibirAssistencia(assist, quantidade);
+                                        break;
+                                    case 3:
+                                        pesquisarNomeAssistencia(assist, quantidade);
+                                        break;
+                                    case 4:
+                                        printf("\033[H\033[J");
+                                        break;
+                                    default:
+                                        printf("Escolha uma opcao valida\n");
+                                        break;
+                                }
+                            }
+                            break;
+                        case 6:
+                            printf("Saindo...\n");
+                            return 0;
                         default:
-                            printf("Escolha uma opcao valida\n");
+                            printf("Escolha uma opcao valida!\n");
                             break;
                     }
                 }
-                break;
-            case 6:
-                printf("Saindo...\n");
-                return 0;
+            }
             default:
-                printf("Escolha uma opcao valida!\n");
+                printf("Opção inválida.\n");
                 break;
         }
+
+        printf("\nPressione Enter para continuar...");
+        while (getchar() != '\n'); // Clear input buffer
+        getchar(); // Wait for Enter key press
     }
+
     return 0;
 }
