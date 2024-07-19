@@ -8,7 +8,7 @@
 typedef struct {
     char email[50];
     char senha[20];
-    bool registrado; // Novo campo para indicar se o usuário está registrado
+    bool registrado; 
 } USUARIO;
 
 typedef struct {
@@ -334,16 +334,16 @@ void menuAssist() {
 }
 
 int main() {
-    USUARIO usuarios[100]; // Array to hold up to 100 users
-    int numUsuarios = 0;   // Counter for number of registered users
-    int opcaoLogin;        // User's menu choice for login/register
+    USUARIO usuarios[100]; 
+    int numUsuarios = 0;   
+    int opcaoLogin;        
 
-    PC listaPc[MAX_PCS];   // Array to hold up to 100 PCs
-    int quantidade = 0;    // Counter for number of registered PCs
+    PC listaPc[MAX_PCS];   
+    int quantidade = 0;    
 
-    ASSISTENCIA assist[MAX_PCS];  // Array to hold up to 100 assistance records
-    int opcao;            // Main menu choice
-    int opcao2;           // Assistance menu choice
+    ASSISTENCIA assist[MAX_PCS];  
+    int opcao;            
+    int opcao2;           
 
     while (true) {
         printf("\033[H\033[J");
@@ -387,7 +387,6 @@ int main() {
 
                 printf("Login realizado com sucesso!\n");
 
-                // After successful login, enter main menu loop
                 while (1) {
                     printf("\033[H\033[J");
                     menu();
@@ -408,7 +407,7 @@ int main() {
                             deletarRegistro(listaPc, &quantidade);
                             break;
                         case 5:
-                            opcao2 = 0; // Initialize opcao2 to enter assistance menu loop
+                            opcao2 = 0; 
                             while (opcao2 != 4) {
                                 printf("\033[H\033[J");
                                 menuAssist();
