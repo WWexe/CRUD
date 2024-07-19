@@ -447,8 +447,8 @@ int main() {
         }
 
         printf("\nPressione Enter para continuar...");
-        while (getchar() != '\n'); // Clear input buffer
-        getchar(); // Wait for Enter key press
+        while (getchar() != '\n'); 
+        getchar(); 
     }
 
     return 0;
