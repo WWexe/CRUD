@@ -369,31 +369,26 @@ int main() {
                 char email[50];
                 char senha[20];
                 bool loginSucesso = false;
-
-                while (true) {
-                    printf("\033[H\033[J");
-                    printf("\033[H\033[J");
-                    printf(" _                 _       \n");
-                    printf("| |               (_)      \n");
-                    printf("| |     ___   __ _ _ _ __  \n");
-                    printf("| |    / _ \\ / _` | | '_ \\ \n");
-                    printf("| |___| (_) | (_| | | | | |\n");
-                    printf("\\_____/\\___/ \\__, |_|_| |_|\n");  
-                    printf("              __/ |        \n");
-                    printf("             |___/         \n\n");
-                    printf("Digite seu email: ");
-                    scanf("%s", email);
-
-                    printf("Digite sua senha: ");
-                    scanf("%s", senha);
-
-                    loginSucesso = loginUsuario(usuarios, numUsuarios, email, senha);
-                    if (!loginSucesso) {
-                        printf("Email ou senha incorretos. Tente novamente.\n");
-                    } else {
-                        printf("Login realizado com sucesso!\n");
-                        break; // Sai do loop de login quando o login for bem-sucedido
-                    }
+                printf("\033[H\033[J");
+                printf("\033[H\033[J");
+                printf(" _                 _       \n");
+                printf("| |               (_)      \n");
+                printf("| |     ___   __ _ _ _ __  \n");
+                printf("| |    / _ \\ / _` | | '_ \\ \n");
+                printf("| |___| (_) | (_| | | | | |\n");
+                printf("\\_____/\\___/ \\__, |_|_| |_|\n");  
+                printf("              __/ |        \n");
+                printf("             |___/         \n\n");
+                printf("Digite seu email: ");
+                scanf("%s", email);
+                printf("Digite sua senha: ");
+                scanf("%s", senha);
+                loginSucesso = loginUsuario(usuarios, numUsuarios, email, senha);
+                if (!loginSucesso) {
+                    printf("Email ou senha incorretos. Tente novamente.\n");
+                } else {
+                    printf("Login realizado com sucesso!\n");
+                    break;
                 }
 
                 while (loginSucesso) {
