@@ -50,8 +50,17 @@ bool verificarEmailValido(const char *email) {
 void cadastrarUsuario(USUARIO *usuario) {
     while (true) {
         printf("\033[H\033[J"); 
+        printf("______                _     _             \n");
+        printf("| ___ \\              (_)   | |            \n");
+        printf("| |_/ /___  ___  __ _ _ ___| |_ _ __ ___  \n");
+        printf("|    // _ \\/ __|/ _` | / __| __| '__/ _ \\ \n");
+        printf("| |\\ \\  __/\\__ \\ (_| | \\__ \\ |_| | | (_) |\n");
+        printf("\\_| \\_\\___||___/\\__, |_|___/\\__|_|  \\___/ \n");
+        printf("                 __/ |                    \n");
+        printf("                |___/                     \n\n");
         printf("Digite seu email: ");
         scanf("%s", usuario->email);
+        printf("\n\nPressione 'ESC' para Voltar");
 
         if (verificarEmailValido(usuario->email)) {
             break; 
@@ -90,20 +99,6 @@ bool loginUsuario(USUARIO *usuarios, int numUsuarios, const char *email, const c
         }
     }
     return false; 
-}
-
-void menuLogin() {
-    printf("\033[H\033[J"); 
-    printf(" _                 _       \n");
-    printf("| |               (_)      \n");
-    printf("| |     ___   __ _ _ _ __  \n");
-    printf("| |    / _ \\ / _` | | '_ \\ \n");
-    printf("| |___| (_) | (_| | | | | |\n");
-    printf("|______\\___/ \\__, |_|_| |_|\n");
-    printf("              __/ |        \n");
-    printf("             |___/         \n\n");
-    printf("| 1 | - Registrar-se\n");
-    printf("| 2 | - Login\n");
 }
 
 void cadastrarAssistencia(ASSISTENCIA assist[], int *quantidade) {
@@ -302,6 +297,21 @@ void exibirPcsCadastrados(PC listaPc[], int quantidade) {
     while (getchar() != '\n') {}
 }
 
+void menuLogin() {
+    printf("\033[H\033[J");
+    printf(" _                 _       \n");
+    printf("| |               (_)      \n");
+    printf("| |     ___   __ _ _ _ __  \n");
+    printf("| |    / _ \\ / _` | | '_ \\ \n");
+    printf("| |___| (_) | (_| | | | | |\n");
+    printf("\\_____/\\___/ \\__, |_|_| |_|\n");  
+    printf("              __/ |        \n");
+    printf("             |___/         \n\n");
+    printf("| 1 | - Registrar-se\n");
+    printf("| 2 | - Login\n");
+    printf("\n*** Escolha uma das opcoes acima ***\n");
+}
+
 void menu() {
     printf("\033[H\033[J");
     printf("  ____                  __      ___           _       \n");
@@ -315,7 +325,8 @@ void menu() {
     printf("| 3 | - Pesquisar PC por Nome\n");
     printf("| 4 | - Deletar Registro\n");
     printf("| 5 | - Assistencia Tecnica\n");
-    printf("| 6 | - Sair\n\n");
+    printf("| 6 | - Desconectar Usuario\n");
+    printf("| 7 | - Sair\n\n");
     printf("*** Escolha uma das opcoes acima ***\n");
 }
 
@@ -345,20 +356,8 @@ int main() {
     int opcao;            
     int opcao2;           
 
-    while (true) {
-        printf("\033[H\033[J");
-        printf(" _                 _       \n");
-        printf("| |               (_)      \n");
-        printf("| |     ___   __ _ _ _ __  \n");
-        printf("| |    / _ \\ / _` | | '_ \\ \n");
-        printf("| |___| (_) | (_| | | | | |\n");
-        printf("|______\\___/ \\__, |_|_| |_|\n");
-        printf("              __/ |        \n");
-        printf("             |___/         \n\n");
-        printf("| 1 | - Registrar-se\n");
-        printf("| 2 | - Login\n");
-
-        printf("\n*** Escolha uma das opcoes acima ***\n");
+    while (1) {
+        menuLogin();
         scanf("%d", &opcaoLogin);
 
         switch (opcaoLogin) {
@@ -371,8 +370,17 @@ int main() {
                 char senha[20];
                 bool loginSucesso = false;
 
-                do {
+                while (true) {
                     printf("\033[H\033[J");
+                    printf("\033[H\033[J");
+                    printf(" _                 _       \n");
+                    printf("| |               (_)      \n");
+                    printf("| |     ___   __ _ _ _ __  \n");
+                    printf("| |    / _ \\ / _` | | '_ \\ \n");
+                    printf("| |___| (_) | (_| | | | | |\n");
+                    printf("\\_____/\\___/ \\__, |_|_| |_|\n");  
+                    printf("              __/ |        \n");
+                    printf("             |___/         \n\n");
                     printf("Digite seu email: ");
                     scanf("%s", email);
 
@@ -382,12 +390,13 @@ int main() {
                     loginSucesso = loginUsuario(usuarios, numUsuarios, email, senha);
                     if (!loginSucesso) {
                         printf("Email ou senha incorretos. Tente novamente.\n");
+                    } else {
+                        printf("Login realizado com sucesso!\n");
+                        break; // Sai do loop de login quando o login for bem-sucedido
                     }
-                } while (!loginSucesso);
+                }
 
-                printf("Login realizado com sucesso!\n");
-
-                while (1) {
+                while (loginSucesso) {
                     printf("\033[H\033[J");
                     menu();
                     scanf("%d", &opcao);
@@ -432,7 +441,10 @@ int main() {
                                 }
                             }
                             break;
-                        case 6:
+                        case 6: 
+                            printf("\033[H\033[J");
+                            break; // Continua no loop principal para fazer login novamente
+                        case 7:
                             printf("Saindo...\n");
                             return 0;
                         default:
@@ -440,6 +452,7 @@ int main() {
                             break;
                     }
                 }
+                break;
             }
             default:
                 printf("Opção inválida.\n");
