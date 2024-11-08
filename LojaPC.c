@@ -72,7 +72,7 @@ void cadastrarUsuario(USUARIO *usuario) {
         if (verificarEmailValido(usuario->email)) {
             break; 
         } else {
-            printf("Email digitado possui um domínio inválido. Digite novamente.\n");
+            printf("Email digitado possui um dominio invalido. Digite novamente.\n");
         }
     }
 
@@ -281,7 +281,7 @@ void deletarRegistro(PC listaPc[], int *quantidade) {
         }
     }
     if (!encontrado) {
-        printf("PC com nome '%s' não encontrado.\n", nome);
+        printf("PC com nome '%s' nao encontrado.\n", nome);
     }
 }
 
@@ -368,6 +368,7 @@ int main() {
     while (1) {
         menuLogin();
         scanf("%d", &opcaoLogin);
+        printf("\033[H\033[J");
 
         switch (opcaoLogin) {
             case 1:
@@ -375,7 +376,7 @@ int main() {
                     cadastrarUsuario(&usuarios[numUsuarios]);
                     numUsuarios++;
                 } else {
-                    printf("Número máximo de usuários atingido!\n");
+                    printf("Numero maximo de usuarios atingido!\n");
                 }
                 break;
             case 2: {
@@ -383,7 +384,6 @@ int main() {
                 char senha[20];
                 bool loginSucesso = false;
 
-                printf("\033[H\033[J");
                 printf(" _                 _       \n");
                 printf("| |               (_)      \n");
                 printf("| |     ___   __ _ _ _ __  \n");
@@ -392,6 +392,7 @@ int main() {
                 printf("\\_____/\\___/ \\__, |_|_| |_|\n");
                 printf("              __/ |        \n");
                 printf("             |___/         \n\n");
+                printf("\n");
 
                 printf("Digite seu email: ");
                 scanf("%49s", email);
@@ -442,7 +443,7 @@ int main() {
                                         case 4:
                                             break; // Volta ao menu principal
                                         default:
-                                            printf("Escolha uma opção válida\n");
+                                            printf("Escolha uma opção valida\n");
                                             break;
                                     }
                                 }
@@ -454,7 +455,7 @@ int main() {
                                 printf("Saindo...\n");
                                 return 0;
                             default:
-                                printf("Escolha uma opção válida!\n");
+                                printf("Escolha uma opçao valida!\n");
                                 break;
                         }
                     }
@@ -462,7 +463,7 @@ int main() {
                 break;
             }
             default:
-                printf("Opção inválida.\n");
+                printf("Opção invalida.\n");
                 break;
         }
 
